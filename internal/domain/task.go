@@ -16,6 +16,7 @@ type Task struct {
   Queue string
   Kind string
   Payload map[string]interface{}
+  State string
   RunAt time.Time
   NextRunAt time.Time
   Attempts int
