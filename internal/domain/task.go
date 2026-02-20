@@ -11,7 +11,6 @@ const (
 	StateDead = "dead"
 )
 
-
 type Task struct {
   ID string
   Queue string
