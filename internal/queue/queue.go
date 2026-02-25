@@ -16,6 +16,10 @@ func New(store store.Store) *Queue {
 }
 
 func (q *Queue) Enqueue(ctx context.Context, task *domain.Task) error {
+  if err := Validate(task); err != nil {
+    return err
+  }
+  
   if task.Queue == "" {
     task.Queue = "default"
   }
