@@ -119,7 +119,7 @@ func (s *Store) Retry(ctx context.Context, taskID string, nextRunAt time.Time) e
   return nil
 }
 
-func copyTask(task *domain.Task) * domain.Task {
+func copyTask(task *domain.Task) *domain.Task {
 	newTask := *task
 	payload := make(map[string]interface{}, len(task.Payload))
 	for k,v := range task.Payload {
@@ -133,6 +133,13 @@ func New() *Store {
 	return &Store{
 		tasks: make(map[string]*domain.Task),
 	}
+}
+
+func (s *Store) GetTask(id string) *domain.Task {
+  s.mu.Lock()
+  defer s.mu.Unlock()
+
+  return s.tasks[id]
 }
 
 var _ store.Store = (*Store)(nil)

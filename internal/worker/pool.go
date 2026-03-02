@@ -116,3 +116,7 @@ func backoffWithJitter(attempt int) time.Duration {
 	jitter := time.Duration(rand.Intn(1000)) * time.Millisecond
 	return base + jitter
 }
+
+func (p *Pool) Register(kind string, h Handler) {
+	p.handlers[kind] = h
+}
